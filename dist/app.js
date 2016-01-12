@@ -19806,21 +19806,36 @@
 	        "div",
 	        null,
 	        _react2.default.createElement(
-	          "label",
-	          { htmlFor: "username" },
-	          "Username",
-	          _react2.default.createElement("input", { type: "text", id: "username" })
+	          "div",
+	          { className: "mdl-textfield mdl-js-textfield mdl-textfield--floating-label" },
+	          _react2.default.createElement("input", { className: "mdl-textfield__input", type: "text", id: "username" }),
+	          _react2.default.createElement(
+	            "label",
+	            { className: "mdl-textfield__label", htmlFor: "username" },
+	            "Username"
+	          )
 	        ),
 	        _react2.default.createElement(
-	          "label",
-	          { htmlFor: "password" },
-	          "Password",
-	          _react2.default.createElement("input", { type: "text", id: "password" })
+	          "div",
+	          { className: "mdl-textfield mdl-js-textfield" },
+	          _react2.default.createElement("input", { type: "text", className: "mdl-textfield__input", id: "password" }),
+	          _react2.default.createElement(
+	            "label",
+	            { className: "mdl-textfield__label", htmlFor: "password" },
+	            "Password"
+	          )
 	        ),
 	        _react2.default.createElement(
-	          "button",
-	          { id: "signIn", onClick: this.props.onAuthComplete.bind(null, this._doAuth) },
-	          "Sign In"
+	          "div",
+	          null,
+	          _react2.default.createElement(
+	            "button",
+	            {
+	              className: "mdl-button mdl-js-button mdl-button--raised",
+	              id: "signIn",
+	              onClick: this.props.onAuthComplete.bind(null, this._doAuth) },
+	            "Sign In"
+	          )
 	        )
 	      );
 	    }
