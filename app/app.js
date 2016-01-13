@@ -11,7 +11,7 @@ class App extends React.Component {
     this._onAuthComplete = this._onAuthComplete.bind(this);
     this._onLogout = this._onLogout.bind(this);
   }
-  
+
   render() {
       return (<div>
         {

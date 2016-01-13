@@ -1,4 +1,5 @@
 import React from 'react';
+import LogActions from '../actions/logactions';
 
 class Option extends React.Component {
   render() {
@@ -9,41 +10,60 @@ class Option extends React.Component {
 class StoreWorkout extends React.Component {
   constructor() {
     super();
-    this._mockWorkouts = [
-      {
-          "id": 0,
-  		    "name": "Murph",
-  		    "type": "fortime",
-  		    "description": "Run 1 Mile \n 100 pull-ups \n 200 push-ups \n 300 squats \n Run 1 Mile"
-  		},
-  		{
-          "id": 1,
-  		    "name": "Tabata Something Else",
-  		    "type": "reps",
-  		    "description": "4 x 20 seconds on 10 seconds off for 4 minutes \n pull-ups, push-ups, sit-ups, squats"
-  		}
-    ]
+    this.state = {
+      log: {
+        "name": "",
+        "result": "",
+        "notes": "",
+        "date": ""
+      }
+    }
+    this._storeWorkout = this._storeWorkout.bind( this );
+    this._onChange = this._onChange.bind( this );
+    this._onSelectChange = this._onSelectChange.bind( this );
   }
 
   render() {
+     this._workouts= [].concat(this.props.allWorkouts);
 		return (
 
 			<div id="logWorkout" className="tabview">
 				<h2>Record Workout</h2>
 	        	<label htmlFor="chooseWorkout">Workout:</label>
-	        	<select name="" id="chooseWorkout">
-              {this._mockWorkouts.map(function(result) {
-                  return <Option key={result.id}  value={result.name} />;
+	        	<select name="chooseWorkout" onChange={this._onSelectChange} id="chooseWorkout">
+              {this._workouts.map(function(result) {
+                  return Object.getOwnPropertyNames(result).map(function(res){
+                    let obj = result[res];
+                    return <Option key={obj.id}  value={obj.name} />;
+                  })
               })}
 	        	</select>
-	        	<label htmlFor="workoutResult">Result:</label>
-	            <input id="workoutResult" type="text" />
-	            <input id="workoutDate" type="date" />
+	        	<label htmlFor="result">Result:</label>
+	            <input id="result" onChange={this._onChange} type="text" />
+	            <input id="date" onChange={this._onChange} type="date" />
 	        	<label htmlFor="notes">Notes:</label>
-	        	<textarea id="notes"></textarea>
-	        	<button>Store</button>
+	        	<textarea id="notes" onChange={this._onChange}></textarea>
+	        	<button onClick={this._storeWorkout}>Store</button>
 	        </div>
 		);
+  }
+
+  _onSelectChange( event ) {
+      console.log(event.target.options[event.target.selectedIndex].text);
+      var log = this.state.log;
+      log.name = event.target.options[event.target.selectedIndex].text;
+      this.setState({ log: log });
+  }
+
+  _onChange( event ) {
+    var log = this.state.log;
+    log[event.target.id] = event.target.value;
+    this.setState({
+      log: log
+    });
+  }
+  _storeWorkout() {
+    LogActions.store(this.state.log);
   }
 }
 

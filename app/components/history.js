@@ -7,34 +7,19 @@ class ListItem extends React.Component {
 }
 
 class History extends React.Component {
-  constructor() {
-    super();
-    this._mockHistory = [
-      {
-          "id": 0,
-          "name": "Murph",
-          "result": "32:18",
-          "notes": "painful, but fun"
-      },
-      {
-          "id": 1,
-          "name": "Tabata Something Else",
-          "type": "reps",
-          "result": "421",
-          "notes": ""
-      }
-    ]
-  }
 
   render() {
-
+    this._logs = [].concat(this.props.allLogs);
 		return (
 			<div>
 				<h2>History</h2>
 				<ul>
-          {this._mockHistory.map(function(result) {
-        			var histObj = { name: result.name, result: result.result };
-              return <ListItem key={result.id} {...histObj} />
+          {this._logs.map(function(result) {
+              return Object.getOwnPropertyNames(result).map(function(res) {
+                let obj = result[res];
+          			let histObj = { name: obj.name, result: obj.result };
+                return <ListItem key={obj.id} {...histObj} />
+              })
           })}
 				</ul>
 			</div>
