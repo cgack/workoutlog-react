@@ -44,7 +44,6 @@ class WorkoutLog extends React.Component {
     }
 
     _onChange() {
-      console.log('change');
       this.setState({
         view: this.state.view,
         allWorkouts: WorkoutStore.getAll(),

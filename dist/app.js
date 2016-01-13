@@ -20030,7 +20030,6 @@
 	  }, {
 	    key: '_onChange',
 	    value: function _onChange() {
-	      console.log('change');
 	      this.setState({
 	        view: this.state.view,
 	        allWorkouts: _WorkoutStore2.default.getAll(),
@@ -20853,7 +20852,6 @@
 	var LogActions = {
 	  // log is an object
 	  store: function store(log) {
-	    console.log(log);
 	    _AppDispatcher2.default.dispatch({
 	      actionType: _LogConstants2.default.LOG_NEW,
 	      log: log
